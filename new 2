@@ -1,0 +1,98 @@
+CREATE TABLE Seans (
+	nomer INT PRIMARY KEY AUTO_INCREMENT,
+	nomer_spektaklya INT,
+	FOREIGN KEY (nomer_spektaklya) REFERENCES Spektakl(nomer),
+	vremya_nachala INT NOT NULL,
+	dlina INT NOT NULL
+);
+
+Insert INTO Seans (vremya_nachala, dlina) VALUES (1630, 2);
+Insert INTO Seans (vremya_nachala, dlina) VALUES (1900, 1);
+Insert INTO Seans (vremya_nachala, dlina) VALUES (1730, 3);
+Insert INTO Seans (vremya_nachala, dlina) VALUES (2100, 4);
+Insert INTO Seans (vremya_nachala, dlina) VALUES (2015, 2);
+
+
+CREATE TABLE dannye (
+	nomer INT PRIMARY KEY AUTO_INCREMENT,
+	seans_nomer INT,
+	FOREIGN KEY (seans_nomer) REFERENCES Seans(nomer),
+	data_pokaza DATE NOT NULL
+);
+
+Insert INTO dannye (seans_nomer, data_pokaza) VALUES (1, '2011-12-13');
+Insert INTO dannye (seans_nomer, data_pokaza) VALUES (2, '2011-11-14');
+Insert INTO dannye (seans_nomer, data_pokaza) VALUES (3, '2015-12-16');
+Insert INTO dannye (seans_nomer, data_pokaza) VALUES (4, '2018-10-12');
+Insert INTO dannye (seans_nomer, data_pokaza) VALUES (5, '2016-04-20');
+
+
+
+CREATE TABLE Spektakl(
+	nomer INT PRIMARY KEY AUTO_INCREMENT,
+	janr VARCHAR(30) NOT NULL,
+	kolichestvomest INT(4) NOT NULL
+);
+
+Insert INTO Spektakl (janr, kolichestvomest) VALUES ('opera', 287);
+Insert INTO Spektakl (janr, kolichestvomest) VALUES ('musikl', 938);
+Insert INTO Spektakl (janr, kolichestvomest) VALUES ('balet', 372);
+Insert INTO Spektakl (janr, kolichestvomest) VALUES ('tanets', 293);
+Insert INTO Spektakl (janr, kolichestvomest) VALUES ('kukulnoepredstavlenie', 783);
+
+
+CREATE TABLE Organizator(
+	kod INT PRIMARY KEY AUTO_INCREMENT,
+	nazvanie VARCHAR(30) NOT NULL
+);
+
+
+Insert INTO Organizator (nazvanie) VALUES ('Organizator1');
+Insert INTO Organizator (nazvanie) VALUES ('Organizator2');
+Insert INTO Organizator (nazvanie) VALUES ('Organizator3');
+Insert INTO Organizator (nazvanie) VALUES ('Organizator4');
+Insert INTO Organizator (nazvanie) VALUES ('Organizator5');
+
+
+
+CREATE TABLE mesto(
+	kod INT PRIMARY KEY AUTO_INCREMENT,
+	adress VARCHAR(30) NOT NULL,
+	gorod VARCHAR
+);
+
+Insert INTO mesto (adress, gorod) VALUES ('ulIvanova2', 'Moskva');
+Insert INTO mesto (adress, gorod) VALUES ('ulPetrova34', 'Moskva');
+Insert INTO mesto (adress, gorod) VALUES ('ulSidorova25', 'StPetersburg');
+Insert INTO mesto (adress, gorod) VALUES ('ulNikolaeva18', 'Kazan');
+Insert INTO mesto (adress, gorod) VALUES ('ulPavlova23', 'Ekaterinburg');
+
+
+
+
+CREATE TABLE Artisty(
+	kod INT PRIMARY KEY AUTO_INCREMENT,
+	seans_nomer INT,
+	FOREIGN KEY (seans_nomer) REFERENCES Seans(nomer)
+);
+
+Insert INTO Artisty (seans_nomer) VALUES (1);
+Insert INTO Artisty (seans_nomer) VALUES (2);
+Insert INTO Artisty (seans_nomer) VALUES (3);
+Insert INTO Artisty (seans_nomer) VALUES (4);
+Insert INTO Artisty (seans_nomer) VALUES (5);
+
+
+CREATE TABLE Artist(
+	kod INT PRIMARY KEY AUTO_INCREMENT,
+	Artisty_kod INT,
+	FOREIGN KEY (Artisty_kod) REFERENCES Artisty(kod),
+	imya VARCHAR(20) NOT NULL,
+	familiya VARCHAR(20) NOT NULL
+);
+
+Insert INTO Artist (imya, familiya) VALUES ('Ivan', 'Ivanov');
+Insert INTO Artist (imya, familiya) VALUES ('Petr', 'Petrov');
+Insert INTO Artist (imya, familiya) VALUES ('Pavel', 'Pavlov');
+Insert INTO Artist (imya, familiya) VALUES ('Nikolai', 'Nikolaev');
+Insert INTO Artist (imya, familiya) VALUES ('Mihail', 'Mihailov');
